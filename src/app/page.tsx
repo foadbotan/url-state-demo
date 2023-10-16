@@ -5,6 +5,7 @@ import ProductImage from '@/components/ProductImage';
 import ProductSelection from '@/components/ProductSelection';
 import ProductVariant from '@/components/ProductVariant';
 import { cn } from '@/lib/cn';
+import { Color, Size } from '@/types';
 import { useState } from 'react';
 
 const HEX: Record<Color, string> = {
@@ -12,9 +13,6 @@ const HEX: Record<Color, string> = {
   green: '#7c7557',
   gold: '#9b6f2a',
 };
-
-export type Color = 'black' | 'gold' | 'green';
-export type Size = '400ml' | '600ml' | '800ml';
 
 const colors: Color[] = ['black', 'gold', 'green'];
 const sizes: Size[] = ['400ml', '600ml', '800ml'];
