@@ -4,7 +4,7 @@ const links = ['Details', 'Gallery', 'Reviews'];
 
 export default function Footer() {
   return (
-    <footer className="flex items-center justify-center gap-2 p-6 sm:gap-6">
+    <footer className="flex items-center justify-center gap-2 p-6 sm:gap-6 sm:p-10">
       {links.map((link, index) => (
         <>
           <div
