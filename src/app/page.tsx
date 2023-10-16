@@ -7,24 +7,24 @@ import ProductVariant from '@/components/ProductVariant';
 import { cn } from '@/lib/cn';
 import { useState } from 'react';
 
-export type Color = 'black' | 'gold' | 'green';
-export type Size = '400ml' | '600ml' | '800ml';
-
-const colors: Color[] = ['black', 'gold', 'green'];
-const sizes: Size[] = ['400ml', '600ml', '800ml'];
-
 const HEX: Record<Color, string> = {
   black: '#2a2a2a',
   green: '#7c7557',
   gold: '#9b6f2a',
 };
 
+export type Color = 'black' | 'gold' | 'green';
+export type Size = '400ml' | '600ml' | '800ml';
+
+const colors: Color[] = ['black', 'gold', 'green'];
+const sizes: Size[] = ['400ml', '600ml', '800ml'];
+
 export default function Home() {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
 
   return (
-    <main className="grid grid-cols-3">
+    <main className="grid max-w-7xl grid-cols-[1fr,2fr,1fr] items-center justify-center">
       <ProductDetails />
       <ProductImage color={selectedColor} />
       <ProductSelection>
