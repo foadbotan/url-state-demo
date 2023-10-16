@@ -1,44 +1,59 @@
 'use client';
+
 import ProductDetails from '@/components/ProductDetails';
 import ProductImage from '@/components/ProductImage';
-import ProductOptions from '@/components/ProductOptions';
+import ProductSelection from '@/components/ProductSelection';
+import ProductVariant from '@/components/ProductVariant';
 import { cn } from '@/lib/cn';
 import { useState } from 'react';
 
-const product = {
-  name: 'Kinto Travel Tumbler',
-  brand: 'Ugmonk',
-  price: 57,
-  description:
-    'The Kinto Travel Tumbler is a compact, double-walled bottle for hot or cold beverages. The two part lid allows for easy filling, cleaning, and drinking (from any angle), yet it’s completely spill-proof and perfect for on-the-go.',
+export type Color = 'black' | 'gold' | 'green';
+export type Size = '400ml' | '600ml' | '800ml';
 
-  colors: ['black', 'khaki', 'coyote'],
-  sizes: ['400ml', '600ml'],
+const colors: Color[] = ['black', 'gold', 'green'];
+const sizes: Size[] = ['400ml', '600ml', '800ml'];
+
+const HEX: Record<Color, string> = {
+  black: '#2a2a2a',
+  green: '#7c7557',
+  gold: '#9b6f2a',
 };
 
-export type Product = typeof product;
-
 export default function Home() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [selectedSize, setSelectedSize] = useState(sizes[0]);
 
   return (
     <main className="grid grid-cols-3">
-      <ProductDetails
-        name={product.name}
-        description={product.description}
-        price={product.price}
-      />
-
+      <ProductDetails />
       <ProductImage color={selectedColor} />
-
-      <ProductOptions
-        product={product}
-        selectedColor={selectedColor}
-        setSelectedColor={setSelectedColor}
-        selectedSize={selectedSize}
-        setSelectedSize={setSelectedSize}
-      />
+      <ProductSelection>
+        <ProductVariant label="Size" value={selectedSize}>
+          {sizes.map((size) => (
+            <button
+              key={size}
+              className={cn('bg-neutral-200 px-4 py-2', {
+                'bg-neutral-800 text-neutral-100 ': selectedSize === size,
+              })}
+              onClick={() => setSelectedSize(size)}
+            >
+              {size}
+            </button>
+          ))}
+        </ProductVariant>
+        <ProductVariant label="Color" value={selectedColor}>
+          {colors.map((color) => (
+            <button
+              key={color}
+              className={cn('h-8 w-8 rounded-full', {
+                'ring-2 ring-neutral-800 ring-offset-2': selectedColor === color,
+              })}
+              onClick={() => setSelectedColor(color)}
+              style={{ backgroundColor: HEX[color] }}
+            />
+          ))}
+        </ProductVariant>
+      </ProductSelection>
     </main>
   );
 }
