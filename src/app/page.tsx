@@ -30,9 +30,10 @@ export default function Home() {
           {sizes.map((size) => (
             <button
               key={size}
-              className={cn('bg-neutral-200 px-4 py-2', {
-                'bg-neutral-800 text-neutral-100 ': selectedSize === size,
-              })}
+              className={cn(
+                'bg-neutral-200 px-4 py-2',
+                selectedSize === size && 'bg-neutral-800 text-neutral-100',
+              )}
               onClick={() => setSelectedSize(size)}
             >
               {size}
@@ -43,9 +44,10 @@ export default function Home() {
           {colors.map((color) => (
             <button
               key={color}
-              className={cn('h-8 w-8 rounded-full', {
-                'ring-2 ring-neutral-800 ring-offset-2': selectedColor === color,
-              })}
+              className={cn(
+                'h-8 w-8 rounded-full',
+                selectedColor === color && 'ring-2 ring-neutral-800 ring-offset-2',
+              )}
               onClick={() => setSelectedColor(color)}
               style={{ backgroundColor: HEX[color] }}
             />
